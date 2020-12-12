@@ -36,14 +36,14 @@ public class ElectricSpawner extends SimpleSlimefunItem<BlockTicker> implements 
     private final EntityType entity;
 
     public ElectricSpawner(Category category, String mob, EntityType type, Research research) {
-        super(category, new SlimefunItemStack("ELECTRIC_SPAWNER_" + mob, "db6bd9727abb55d5415265789d4f2984781a343c68dcaf57f554a5e9aa1cd", "&ePowered Spawner &7(" + StringUtils.format(mob)
-                + ")", "", "&8\u21E8 &e\u26A1 &7Max Entity Cap: 6", "&8\u21E8 &e\u26A1 &7512 J Buffer", "&8\u21E8 &e\u26A1 &7240 J/Mob"), RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] { null, SlimefunItems.PLUTONIUM, null, SlimefunItems.ELECTRIC_MOTOR, new CustomItem(Material.SPAWNER, "&bReinforced Spawner", "&7Type: &b" + StringUtils.format(type.toString())), SlimefunItems.ELECTRIC_MOTOR, SlimefunItems.BLISTERING_INGOT_3, SlimefunItems.LARGE_CAPACITOR, SlimefunItems.BLISTERING_INGOT_3 });
+        super(category, new SlimefunItemStack("ELECTRIC_SPAWNER_" + mob, "db6bd9727abb55d5415265789d4f2984781a343c68dcaf57f554a5e9aa1cd", "&e电力刷怪笼&7(" + StringUtils.format(mob)
+                + ")", "", "&8\u21E8 &e\u26A1 &7最大实体生成: 6", "&8\u21E8 &e\u26A1 &7512 J 可储存", "&8\u21E8 &e\u26A1 &7240 J/个生物"), RecipeType.ENHANCED_CRAFTING_TABLE, new ItemStack[] { null, SlimefunItems.PLUTONIUM, null, SlimefunItems.ELECTRIC_MOTOR, new CustomItem(Material.SPAWNER, "&b已修复的刷怪笼", "&7类型: &b" + StringUtils.format(type.toString())), SlimefunItems.ELECTRIC_MOTOR, SlimefunItems.BLISTERING_INGOT_3, SlimefunItems.LARGE_CAPACITOR, SlimefunItems.BLISTERING_INGOT_3 });
 
         this.entity = type;
 
         addItemHandler(onBlockPlace());
 
-        new BlockMenuPreset(getID(), "&cPowered Spawner") {
+        new BlockMenuPreset(getID(), "&c电力刷怪笼") {
 
             @Override
             public void init() {
@@ -57,7 +57,7 @@ public class ElectricSpawner extends SimpleSlimefunItem<BlockTicker> implements 
             @Override
             public void newInstance(BlockMenu menu, Block b) {
                 if (!BlockStorage.hasBlockInfo(b) || BlockStorage.getLocationInfo(b.getLocation(), "enabled") == null || BlockStorage.getLocationInfo(b.getLocation(), "enabled").equals("false")) {
-                    menu.replaceExistingItem(4, new CustomItem(Material.GUNPOWDER, "&7Enabled: &4\u2718", "", "&e> Click to enable this Machine"));
+                    menu.replaceExistingItem(4, new CustomItem(Material.GUNPOWDER, "&7工作中: &4\u2718", "", "&e> 点击启用"));
                     menu.addMenuClickHandler(4, (p, slot, item, action) -> {
                         BlockStorage.addBlockInfo(b, "enabled", "true");
                         newInstance(menu, b);
@@ -65,7 +65,7 @@ public class ElectricSpawner extends SimpleSlimefunItem<BlockTicker> implements 
                     });
                 }
                 else {
-                    menu.replaceExistingItem(4, new CustomItem(Material.REDSTONE, "&7Enabled: &2\u2714", "", "&e> Click to disable this Machine"));
+                    menu.replaceExistingItem(4, new CustomItem(Material.REDSTONE, "&7工作中: &2\u2714", "", "&e> 点击关闭"));
                     menu.addMenuClickHandler(4, (p, slot, item, action) -> {
                         BlockStorage.addBlockInfo(b, "enabled", "false");
                         newInstance(menu, b);
