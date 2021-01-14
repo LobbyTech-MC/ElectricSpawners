@@ -44,7 +44,7 @@ public class ElectricSpawner extends SimpleSlimefunItem<BlockTicker> implements 
 
         addItemHandler(onBlockPlace());
 
-        new BlockMenuPreset(getID(), "&c电力刷怪笼") {
+        new BlockMenuPreset(getId(), "&c电力刷怪笼") {
 
             @Override
             public void init() {
@@ -64,8 +64,7 @@ public class ElectricSpawner extends SimpleSlimefunItem<BlockTicker> implements 
                         newInstance(menu, b);
                         return false;
                     });
-                }
-                else {
+                } else {
                     menu.replaceExistingItem(4, new CustomItem(Material.REDSTONE, "&7工作中: &2\u2714", "", "&e> 点击关闭"));
                     menu.addMenuClickHandler(4, (p, slot, item, action) -> {
                         BlockStorage.addBlockInfo(b, "enabled", "false");
